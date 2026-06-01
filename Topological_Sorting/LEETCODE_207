@@ -1,17 +1,17 @@
 int dfs(int course, int** graph, int* graphSize, int* visited) {
-    if (visited[course] == 1)  // currently visiting → cycle found
+    if (visited[course] == 1)  
         return 0;
-    if (visited[course] == 2)  // already processed → no cycle
+    if (visited[course] == 2)  
         return 1;
 
-    visited[course] = 1;  // mark as visiting
+    visited[course] = 1;  
 
     for (int i = 0; i < graphSize[course]; i++) {
         if (!dfs(graph[course][i], graph, graphSize, visited))
             return 0;
     }
 
-    visited[course] = 2;  // mark as done
+    visited[course] = 2;  
     return 1;
 }
 bool canFinish(int numCourses, int** prerequisites, int prerequisitesSize, int* prerequisitesColSize) {
@@ -28,7 +28,7 @@ bool canFinish(int numCourses, int** prerequisites, int prerequisitesSize, int* 
 
     int* visited = (int*)calloc(numCourses, sizeof(int));
 
-    // DFS for each course
+    
     for (int i = 0; i < numCourses; i++) {
         if (!dfs(i, graph, graphSize, visited)) {
             // Free memory before returning
@@ -40,7 +40,6 @@ bool canFinish(int numCourses, int** prerequisites, int prerequisitesSize, int* 
         }
     }
 
-    // Free memory
     for (int i = 0; i < numCourses; i++) free(graph[i]);
     free(graph);
     free(graphSize);
